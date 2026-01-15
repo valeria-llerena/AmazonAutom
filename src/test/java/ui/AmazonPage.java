@@ -28,7 +28,7 @@ public class AmazonPage {
 
 
     public static final Target SORT_DROPDOWN = Target.the("Botón de ordenar por")
-            .locatedBy("#a-autoid-0-announce, #a-autoid-1-announce, .a-dropdown-container");
+            .locatedBy("#s-result-sort-select, #a-autoid-0-announce, .a-button-dropdown");
     // Intentará varios selectores comunes de Amazon o la clase del contenedor
 //    public static final Target OPTION_LOW_TO_HIGH = Target.the("Opción: Precio de bajo a alto")
 //            .locatedBy("#s-result-sort-select_1");

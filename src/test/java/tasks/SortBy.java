@@ -6,6 +6,7 @@ import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.JavaScriptClick;
 import net.serenitybdd.screenplay.targets.Target;
 import net.serenitybdd.screenplay.waits.WaitUntil;
+import net.serenitybdd.screenplay.actions.Scroll;
 import ui.AmazonPage;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
@@ -39,14 +40,19 @@ public class SortBy implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                // 1. Abrir el menú
-                WaitUntil.the(AmazonPage.SORT_DROPDOWN, isVisible()).forNoMoreThan(10).seconds(),
-                Click.on(AmazonPage.SORT_DROPDOWN),
+                // 1. Scroll suave hasta el elemento para que sea visible
+                Scroll.to(AmazonPage.SORT_DROPDOWN),
 
-                // 2. Esperar a que la opción específica sea visible en el popover
+                // 2. Esperar a que el elemento esté listo
+                WaitUntil.the(AmazonPage.SORT_DROPDOWN, isVisible()).forNoMoreThan(10).seconds(),
+
+                // 3. Abrir el dropdown usando JS para saltar el bloqueo del Header
+                JavaScriptClick.on(AmazonPage.SORT_DROPDOWN),
+
+                // 4. Esperar que la opción (lowToHigh, etc.) sea visible
                 WaitUntil.the(option, isVisible()).forNoMoreThan(5).seconds(),
 
-                // 3. Clic forzado con JS para ignorar bloqueos de animación o capas invisibles
+                // 5. Clic en la opción con JS
                 JavaScriptClick.on(option)
         );
     }

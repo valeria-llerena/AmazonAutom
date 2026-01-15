@@ -1,17 +1,11 @@
 pipeline {
     agent any
-
-    tools {
-        maven 'Maven-3.9'
-        jdk 'JDK-17'
-    }
-
     stages {
 
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/tu-usuario/retoTecnico.git'
+                    url: 'https://github.com/valeria-llerena/AmazonAutom'
             }
         }
 
